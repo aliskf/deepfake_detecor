@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deepfake Detector</title>
+</head>
+<body>
+    <h1>Deepfake Detector</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" id="file-input">
+        <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            const fileInput = document.getElementById('file-input');
+            formData.append('file', fileInput.files[0]);
+
+            const startTime = Date.now();
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const endTime = Date.now();
+
+            const result = await response.json();
+            const timeTaken = (endTime - startTime) / 1000;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>Prediction: ${result.prediction}</p>
+                <p>Reference ID: ${result.ref_id}</p>
+                <p>Time Taken: ${timeTaken.toFixed(2)} seconds</p>
+            `;
+        });
+    </script>
+</body>
+</html>

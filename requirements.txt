@@ -1,0 +1,8 @@
+Flask
+pymongo==3.11
+gunicorn
+tensorflow
+pillow
+numpy
+deeplake<4
+gdown

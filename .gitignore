@@ -1,0 +1,17 @@
+# Log files
+app.log
+
+# Python cache
+__pycache__/
+
+# Model files
+deepfake_detector_model.h5
+
+# Temporary files
+*.tmp.*
+
+# Datasets and large files
+img_align_celeba.zip
+image_classification_data/
+images1024x1024/
+ffhq-dataset-v2.json
